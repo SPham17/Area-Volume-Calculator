@@ -7,10 +7,12 @@ import java.awt.event.ActionListener;
 
 public class Choose extends JFrame {
 
+    AreaFunctions area = new AreaFunctions();
+    VolumeFunctions volume = new VolumeFunctions();
+
     public void ChooseType(){
         setSize(300, 500);
-
-        setVisible(false);
+        setVisible(true);
 
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
@@ -38,12 +40,14 @@ public class Choose extends JFrame {
         // closes the JFrame when clicking "button"
         buttonArea.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                area.Area();
                 dispose();
             }
         });
 
         buttonVolume.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                volume.Volume();
                 dispose();
             }
         });

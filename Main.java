@@ -8,9 +8,6 @@ public class Main {
         JF_many_components aFrame = new JF_many_components();
         aFrame.setVisible(true);
 
-            Choose bFrame = new Choose();
-            bFrame.ChooseType();
-
 
         }
     }

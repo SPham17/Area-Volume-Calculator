@@ -43,11 +43,10 @@ public class JF_many_components extends JFrame {
         // closes the JFrame when clicking "button"
         button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if(e.getSource() == button)
 
-                choose.setSize(300,300);
-                choose.setVisible (true);
-                dispose();
+                    choose.ChooseType();
+                    setVisible(false);
+                    dispose();
             }
         });
 
