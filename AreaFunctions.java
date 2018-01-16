@@ -7,10 +7,11 @@ import java.awt.event.ActionListener;
 
 public class AreaFunctions extends JFrame{
 
-    public void Area(){
+    public AreaFunctions(){
+        super("Steven's Area Calculator™");
+
         setSize(400, 400);
 
-        setVisible(true);
 
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 

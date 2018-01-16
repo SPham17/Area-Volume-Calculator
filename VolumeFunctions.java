@@ -7,10 +7,11 @@ import java.awt.event.ActionListener;
 
 public class VolumeFunctions extends JFrame{
 
-    public void Volume(){
+    public VolumeFunctions(){
+        super("Steven's Volume Calculator™");
+
         setSize(400, 400);
 
-        setVisible(true);
 
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
@@ -28,13 +29,13 @@ public class VolumeFunctions extends JFrame{
         JTextField yint = new JTextField(12);
 
         JLabel DomainLow = new JLabel("Please enter your lower domain: ");
-        JTextField d1 = new JTextField(12);
+        JTextField D1 = new JTextField(12);
 
         JLabel DomainHigh = new JLabel("Please enter your higher domain: ");
-        JTextField d2 = new JTextField(12);
+        JTextField D2 = new JTextField(12);
 
         JLabel Accuracy = new JLabel("Please enter the amount of iterations: ");
-        JTextField n = new JTextField(12);
+        JTextField N = new JTextField(12);
 
         // Here is our button
         JButton buttonVolume = new JButton("Calculate Volume!");
@@ -50,11 +51,11 @@ public class VolumeFunctions extends JFrame{
         add(B);
         add(yint);
         add(DomainLow);
-        add(d1);
+        add(D1);
         add(DomainHigh);
-        add(d2);
+        add(D2);
         add(Accuracy);
-        add(n);
+        add(N);
         add(promptName);
         add(buttonVolume);
         add(VolumeDisplay);
@@ -66,9 +67,11 @@ public class VolumeFunctions extends JFrame{
                 // We have to parse the text to a type double.
                 m = Double.parseDouble(slope.getText());
                 b = Double.parseDouble(yint.getText());
-                d1 = Double.parseDouble(DomainLow.getText());
-                d2 = Double.parseDouble(DomainLow.getText());
-                n = Double.parseDouble(Accuracy.getText());
+                d1 = Double.parseDouble(D1.getText());
+                d2 = Double.parseDouble(D2.getText());
+                n = Double.parseDouble(N.getText());
+
+                volume = 0;
 
                 // Now we can perform the equation
                 for (double x = 0; x < n; x++) {
@@ -86,11 +89,10 @@ public class VolumeFunctions extends JFrame{
                     circum = 2 * Math.PI * radius;
 
                     // finds volume of the shell with previously calculated data, adds to total volume
-                    volume = Math.abs(dradius * height * circum);
+                    volume += Math.abs(dradius * height * circum);
 
                     // repeat until reaches number of shells / iterations
                     // end of for loop
-
 
                     // We will now pass the value of result to jTextField3.
                     // At the same time, we are going to

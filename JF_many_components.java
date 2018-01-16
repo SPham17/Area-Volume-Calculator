@@ -40,12 +40,13 @@ public class JF_many_components extends JFrame {
         add(nameField);
         add(button);
 
+
+
         // closes the JFrame when clicking "button"
         button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
-                    choose.ChooseType();
-                    setVisible(false);
+                    choose.setVisible(true);
                     dispose();
             }
         });

@@ -10,15 +10,19 @@ public class Choose extends JFrame {
     AreaFunctions area = new AreaFunctions();
     VolumeFunctions volume = new VolumeFunctions();
 
-    public void ChooseType(){
-        setSize(300, 500);
-        setVisible(true);
+    public Choose(){
+        super("Choosing Calculator");
+
+        setSize(280, 500);
+
 
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
         // Here is our heading
         JLabel heading = new JLabel("Please choose: Area or Volume? ");
         heading.setFont(new Font("Arial", Font.BOLD, 14));
+
+        JLabel Name = new JLabel("Welcome!");
 
         // Here is our prompt
         JLabel promptName = new JLabel("Choice: ");
@@ -32,6 +36,7 @@ public class Choose extends JFrame {
 
         // Add components to the JFrame
         add(heading);
+        add(Name);
         add(promptName);
         add(buttonArea);
         add(buttonVolume);
@@ -40,14 +45,30 @@ public class Choose extends JFrame {
         // closes the JFrame when clicking "button"
         buttonArea.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                area.Area();
-                dispose();
+
+                setVisible(true);
+                JPopupMenu function = new JPopupMenu("Please choose a function!");
+
+                JButton Linear = new JButton("Linear function");
+                JButton Quadratic = new JButton("Quadratic function");
+                JButton Sine = new JButton("Sinusoidal function ( Sine )");
+                JButton Cosine = new JButton("Sinusoidal function ( Cosine )");
+
+                setLayout(new FlowLayout());
+
+                add(function);
+                add(Linear);
+                add(Quadratic);
+                add(Sine);
+                add(Cosine);
+
             }
         });
 
         buttonVolume.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                volume.Volume();
+
+                volume.setVisible(true);
                 dispose();
             }
         });
