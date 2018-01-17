@@ -54,13 +54,42 @@ public class Choose extends JFrame {
                 JButton Sine = new JButton("Sinusoidal function ( Sine )");
                 JButton Cosine = new JButton("Sinusoidal function ( Cosine )");
 
-                setLayout(new FlowLayout());
-
                 add(function);
                 add(Linear);
                 add(Quadratic);
                 add(Sine);
                 add(Cosine);
+                 Linear.addActionListener(new ActionListener() {
+                     public void actionPerformed(ActionEvent e) {
+                         area.Linearfunction();
+                         area.setVisible(true);
+                         dispose();
+                     }
+                 });
+
+                 Quadratic.addActionListener(new ActionListener() {
+                     public void actionPerformed(ActionEvent e) {
+                         area.Quadraticfunction();
+                         area.setVisible(true);
+                         dispose();
+                      }
+                 });
+
+                Sine.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        area.Sinefunction();
+                        area.setVisible(true);
+                        dispose();
+                    }
+                });
+
+                Cosine.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        area.Cosinefunction();
+                        area.setVisible(true);
+                        dispose();
+                    }
+                });
 
             }
         });
@@ -72,7 +101,6 @@ public class Choose extends JFrame {
                 dispose();
             }
         });
-
 
     }
 
