@@ -32,16 +32,16 @@ public class AreaFunctions extends JFrame {
         JTextField yint = new JTextField(12);
 
         JLabel DomainLow = new JLabel("Please enter your lower domain: ");
-        JTextField d1 = new JTextField(12);
+        JTextField D1 = new JTextField(12);
 
         JLabel DomainHigh = new JLabel("Please enter your higher domain: ");
-        JTextField d2 = new JTextField(12);
+        JTextField D2 = new JTextField(12);
 
         JLabel Accuracy = new JLabel("Please enter the amount of iterations: ");
-        JTextField n = new JTextField(12);
+        JTextField N = new JTextField(12);
 
-        JLabel Gx = new JLabel(" Please input gx: ");
-        JTextField gx = new JTextField(12);
+        JLabel Gxx = new JLabel(" Please input a gx function: ");
+        JTextField Gx = new JTextField(12);
 
         // Here is our button
         JButton buttonArea = new JButton("Calculate Area!");
@@ -58,13 +58,13 @@ public class AreaFunctions extends JFrame {
         add(B);
         add(yint);
         add(DomainLow);
-        add(d1);
+        add(D1);
         add(DomainHigh);
-        add(d2);
+        add(D2);
         add(Accuracy);
-        add(n);
+        add(N);
+        add(Gxx);
         add(Gx);
-        add(gx);
         add(buttonArea);
         add(AreaDisplay);
 
@@ -78,9 +78,9 @@ public class AreaFunctions extends JFrame {
                 // We have to parse the text to a type double.
                 m = Double.parseDouble(slope.getText());
                 b = Double.parseDouble(yint.getText());
-                d1 = Double.parseDouble(DomainLow.getText());
-                d2 = Double.parseDouble(DomainHigh.getText());
-                n = Double.parseDouble(Accuracy.getText());
+                d1 = Double.parseDouble(D1.getText());
+                d2 = Double.parseDouble(D2.getText());
+                n = Double.parseDouble(N.getText());
                 gx = Double.parseDouble(Gx.getText());
 
                 width = (d2 - d1) / n;       // gets the width of the small rectangles, divides by number of slices to create even slices
@@ -106,22 +106,28 @@ public class AreaFunctions extends JFrame {
         JLabel heading = new JLabel("You have chosen the area option! ");
         heading.setFont(new Font("Arial", Font.BOLD, 14));
 
-        JLabel promptName = new JLabel("Area of a Curve: Quadratic");
+        JLabel promptName = new JLabel("Area of a Curve: Linear");
 
-        JLabel M = new JLabel("Please enter your slope: ");
-        JTextField slope = new JTextField(12);
+        JLabel A = new JLabel("Please enter your a value: ");
+        JTextField Vert = new JTextField(12);
 
-        JLabel B = new JLabel("Please enter your y - intercept: ");
-        JTextField yint = new JTextField(12);
+        JLabel H = new JLabel("Please enter your h value: ");
+        JTextField Horz = new JTextField(12);
+
+        JLabel C = new JLabel("Please enter your c value: ");
+        JTextField yq = new JTextField(12);
 
         JLabel DomainLow = new JLabel("Please enter your lower domain: ");
-        JTextField d1 = new JTextField(12);
+        JTextField D1 = new JTextField(12);
 
         JLabel DomainHigh = new JLabel("Please enter your higher domain: ");
-        JTextField d2 = new JTextField(12);
+        JTextField D2 = new JTextField(12);
 
         JLabel Accuracy = new JLabel("Please enter the amount of iterations: ");
-        JTextField n = new JTextField(12);
+        JTextField N = new JTextField(12);
+
+        JLabel Gxx = new JLabel(" Please input a gx function: ");
+        JTextField Gx = new JTextField(12);
 
         // Here is our button
         JButton buttonArea = new JButton("Calculate Area!");
@@ -133,32 +139,53 @@ public class AreaFunctions extends JFrame {
         // Add components to the JFrame
         add(heading);
         add(promptName);
-        add(M);
-        add(slope);
-        add(B);
-        add(yint);
+        add(A);
+        add(Vert);
+        add(H);
+        add(Horz);
+        add(C);
+        add(yq);
         add(DomainLow);
-        add(d1);
+        add(D1);
         add(DomainHigh);
-        add(d2);
+        add(D2);
         add(Accuracy);
-        add(n);
+        add(N);
+        add(Gxx);
+        add(Gx);
         add(buttonArea);
         add(AreaDisplay);
 
         buttonArea.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // First we define double variables.
-                double m, b, d1, d2, n, dradius, Area;
+                double a, h, c, d1, d2, n, width, length, gx, Area, rectangle;
 
                 Area = 0;
 
                 // We have to parse the text to a type double.
-                m = Double.parseDouble(slope.getText());
-                b = Double.parseDouble(yint.getText());
-                d1 = Double.parseDouble(DomainLow.getText());
-                d2 = Double.parseDouble(DomainLow.getText());
-                n = Double.parseDouble(Accuracy.getText());
+                a = Double.parseDouble(Vert.getText());
+                h = Double.parseDouble(Horz.getText());
+                c = Double.parseDouble((yq.getText()));
+                d1 = Double.parseDouble(D1.getText());
+                d2 = Double.parseDouble(D2.getText());
+                n = Double.parseDouble(N.getText());
+                gx = Double.parseDouble(Gx.getText());
+
+                width = (d2 - d1) / n;                                                // gets the width of the small rectangles, divides by number of slices to create even slices
+                length = a * (d2 - h)*(d1 - h) + c - gx;   // gets initial height of the rectangle
+
+                for (double x = 0; x < n; x++) {                                                // continues adding rectangles until reaches number of slices
+
+                    rectangle = Math.abs(width * length);                                              // calculates area of the rectangle, absolute value for positive area
+
+                    d1 += width;                                                                      // moves rectangle over to the right one point
+                    length = a * (d1 - h)*(d1 - h) + c - gx;           // finds new height for the new rectangle
+
+                    Area += rectangle;
+
+                    AreaDisplay.setText(String.valueOf(Area));
+                }
 
             }
         });}
