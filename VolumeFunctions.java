@@ -7,6 +7,8 @@ import java.awt.event.ActionListener;
 
 public class VolumeFunctions extends JFrame{
 
+    Utility q1 = new Utility();
+
     public VolumeFunctions(){
         super("Steven's Volume Calculator™");
 
@@ -37,10 +39,11 @@ public class VolumeFunctions extends JFrame{
         JLabel Accuracy = new JLabel("Please enter the amount of iterations: ");
         JTextField N = new JTextField(12);
 
+
         // Here is our button
         JButton buttonVolume = new JButton("Calculate Volume!");
 
-        JTextField VolumeDisplay = new JTextField(12);
+        JLabel VolumeDisplay = new JLabel();
 
         setLayout(new FlowLayout());
 
@@ -70,6 +73,8 @@ public class VolumeFunctions extends JFrame{
                 d1 = Double.parseDouble(D1.getText());
                 d2 = Double.parseDouble(D2.getText());
                 n = Double.parseDouble(N.getText());
+
+                q1.setQuadrant1Volume(d1,d2,n);
 
                 volume = 0;
 

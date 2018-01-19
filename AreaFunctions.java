@@ -6,19 +6,30 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class AreaFunctions extends JFrame {
+    // variables for sine, cosine, and quadratic
+    double a, k, d, c;
+    // variable for quadratic
+    double h;
+    // variables for linear
+    double m, b;
+    // general variables for all functions
+    double d1, d2, n, width, length, gx, Area, rectangle;
+    // radians or degrees
+    boolean degrees;
+    // access to utility class
+    Utility rad = new Utility();
 
     public AreaFunctions() {
         super("Steven's Area Calculator™");
 
-        setSize(400, 400);
-
 
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+
     }
 
 
-
     public void Linearfunction() {
+        setSize(400, 400);
 
         JLabel heading = new JLabel("You have chosen the area option! ");
         heading.setFont(new Font("Arial", Font.BOLD, 14));
@@ -37,7 +48,7 @@ public class AreaFunctions extends JFrame {
         JLabel DomainHigh = new JLabel("Please enter your higher domain: ");
         JTextField D2 = new JTextField(12);
 
-        JLabel Accuracy = new JLabel("Please enter the amount of iterations: ");
+        JLabel Accuracy = new JLabel("Please enter the accuracy: ");
         JTextField N = new JTextField(12);
 
         JLabel Gxx = new JLabel(" Please input a gx function: ");
@@ -46,7 +57,7 @@ public class AreaFunctions extends JFrame {
         // Here is our button
         JButton buttonArea = new JButton("Calculate Area!");
 
-        JTextField AreaDisplay = new JTextField(12);
+        JLabel AreaDisplay = new JLabel();
 
         setLayout(new FlowLayout());
 
@@ -71,7 +82,6 @@ public class AreaFunctions extends JFrame {
         buttonArea.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // First we define double variables.
-                double m, b, d1, d2, n, width, length, gx, Area, rectangle;
 
                 Area = 0;
 
@@ -83,30 +93,35 @@ public class AreaFunctions extends JFrame {
                 n = Double.parseDouble(N.getText());
                 gx = Double.parseDouble(Gx.getText());
 
-                width = (d2 - d1) / n;       // gets the width of the small rectangles, divides by number of slices to create even slices
-                length = m * d1 + b - gx;      // gets height (length) of the initial small rectangle
+                rad.setQuadrant1Area(d1, d2, n);
 
-                for (double x = 0; x < n; x++) {               // keeps adding one rectangle until it reaches the number of slices
+                width = (d2 - d1) / n;
+                length = m * d1 + b - gx;
 
-                    rectangle = Math.abs(width * length); // calculates area of the rectangle, absolute value for positive area
+                for (double x = 0; x < n; x++) {
 
-                    d1 += width;                         // moves rectangle over to the right one point
-                    length = m * d1 + b - gx; // finds new height for new rectangle
+                    rectangle = Math.abs(width * length);
 
-                    Area += rectangle;                         // adds rectangle to the total area
+                    d1 += width;
+                    length = m * d1 + b - gx;
+
+                    Area += rectangle;
 
                     AreaDisplay.setText(String.valueOf(Area));
                 }
 
             }
-        });}
+                    });
+                    }
 
     public void Quadraticfunction() {
+
+        setSize(420, 400);
 
         JLabel heading = new JLabel("You have chosen the area option! ");
         heading.setFont(new Font("Arial", Font.BOLD, 14));
 
-        JLabel promptName = new JLabel("Area of a Curve: Linear");
+        JLabel promptName = new JLabel("Area of a Curve: Quadratic");
 
         JLabel A = new JLabel("Please enter your a value: ");
         JTextField Vert = new JTextField(12);
@@ -114,7 +129,7 @@ public class AreaFunctions extends JFrame {
         JLabel H = new JLabel("Please enter your h value: ");
         JTextField Horz = new JTextField(12);
 
-        JLabel C = new JLabel("Please enter your c value: ");
+        JLabel K = new JLabel("Please enter your k value: ");
         JTextField yq = new JTextField(12);
 
         JLabel DomainLow = new JLabel("Please enter your lower domain: ");
@@ -123,7 +138,7 @@ public class AreaFunctions extends JFrame {
         JLabel DomainHigh = new JLabel("Please enter your higher domain: ");
         JTextField D2 = new JTextField(12);
 
-        JLabel Accuracy = new JLabel("Please enter the amount of iterations: ");
+        JLabel Accuracy = new JLabel("Please enter the accuracy: ");
         JTextField N = new JTextField(12);
 
         JLabel Gxx = new JLabel(" Please input a gx function: ");
@@ -132,7 +147,7 @@ public class AreaFunctions extends JFrame {
         // Here is our button
         JButton buttonArea = new JButton("Calculate Area!");
 
-        JTextField AreaDisplay = new JTextField(12);
+        JLabel AreaDisplay = new JLabel();
 
         setLayout(new FlowLayout());
 
@@ -143,7 +158,7 @@ public class AreaFunctions extends JFrame {
         add(Vert);
         add(H);
         add(Horz);
-        add(C);
+        add(K);
         add(yq);
         add(DomainLow);
         add(D1);
@@ -159,28 +174,29 @@ public class AreaFunctions extends JFrame {
         buttonArea.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // First we define double variables.
-                double a, h, c, d1, d2, n, width, length, gx, Area, rectangle;
 
                 Area = 0;
 
                 // We have to parse the text to a type double.
                 a = Double.parseDouble(Vert.getText());
                 h = Double.parseDouble(Horz.getText());
-                c = Double.parseDouble((yq.getText()));
+                k = Double.parseDouble((yq.getText()));
                 d1 = Double.parseDouble(D1.getText());
                 d2 = Double.parseDouble(D2.getText());
                 n = Double.parseDouble(N.getText());
                 gx = Double.parseDouble(Gx.getText());
 
-                width = (d2 - d1) / n;                                                // gets the width of the small rectangles, divides by number of slices to create even slices
-                length = a * (d2 - h)*(d1 - h) + c - gx;   // gets initial height of the rectangle
+                rad.setQuadrant1Area(d1, d2, n);
 
-                for (double x = 0; x < n; x++) {                                                // continues adding rectangles until reaches number of slices
+                width = (d2 - d1) / n;
+                length = a * (d2 - h) * (d1 - h) + k - gx;
 
-                    rectangle = Math.abs(width * length);                                              // calculates area of the rectangle, absolute value for positive area
+                for (double x = 0; x < n; x++) {
 
-                    d1 += width;                                                                      // moves rectangle over to the right one point
-                    length = a * (d1 - h)*(d1 - h) + c - gx;           // finds new height for the new rectangle
+                    rectangle = Math.abs(width * length);
+
+                    d1 += width;
+                    length = a * (d1 - h) * (d1 - h) + k - gx;
 
                     Area += rectangle;
 
@@ -188,133 +204,262 @@ public class AreaFunctions extends JFrame {
                 }
 
             }
-        });}
+        });
+    }
 
     public void Sinefunction() {
+
+        setSize(360, 400);
 
         JLabel heading = new JLabel("You have chosen the area option! ");
         heading.setFont(new Font("Arial", Font.BOLD, 14));
 
         JLabel promptName = new JLabel("Area of a Curve: Sinusoidal (Sine)");
 
-        JLabel M = new JLabel("Please enter your slope: ");
-        JTextField slope = new JTextField(12);
+        JLabel AA = new JLabel("Please enter your a value: ");
+        JTextField A = new JTextField(12);
 
-        JLabel B = new JLabel("Please enter your y - intercept: ");
-        JTextField yint = new JTextField(12);
+        JLabel KK = new JLabel("Please enter your k value: ");
+        JTextField K = new JTextField(12);
+
+        JLabel DD = new JLabel("Please enter your D value: ");
+        JTextField D = new JTextField(12);
+
+        JLabel CC = new JLabel("Please enter your C value: ");
+        JTextField C = new JTextField(12);
 
         JLabel DomainLow = new JLabel("Please enter your lower domain: ");
-        JTextField d1 = new JTextField(12);
+        JTextField D1 = new JTextField(12);
 
         JLabel DomainHigh = new JLabel("Please enter your higher domain: ");
-        JTextField d2 = new JTextField(12);
+        JTextField D2 = new JTextField(12);
 
-        JLabel Accuracy = new JLabel("Please enter the amount of iterations: ");
-        JTextField n = new JTextField(12);
+        JLabel Accuracy = new JLabel("Please enter the accuracy: ");
+        JTextField N = new JTextField(12);
+
+        JLabel Gxx = new JLabel(" Please input a gx function: ");
+        JTextField Gx = new JTextField(12);
+
+        JToggleButton Rad = new JToggleButton("Toggle me for Radians");
 
         // Here is our button
         JButton buttonArea = new JButton("Calculate Area!");
 
-        JTextField AreaDisplay = new JTextField(12);
+        JLabel AreaDisplay = new JLabel();
 
         setLayout(new FlowLayout());
 
         // Add components to the JFrame
         add(heading);
         add(promptName);
-        add(M);
-        add(slope);
-        add(B);
-        add(yint);
+        add(AA);
+        add(A);
+        add(KK);
+        add(K);
+        add(DD);
+        add(D);
+        add(CC);
+        add(C);
         add(DomainLow);
-        add(d1);
+        add(D1);
         add(DomainHigh);
-        add(d2);
+        add(D2);
         add(Accuracy);
-        add(n);
+        add(N);
+        add(Gxx);
+        add(Gx);
+        add(Rad);
         add(buttonArea);
         add(AreaDisplay);
 
-        buttonArea.addActionListener(new ActionListener() {
+        Rad.addActionListener(new ActionListener() {
+
             public void actionPerformed(ActionEvent e) {
-                // First we define double variables.
-                double m, b, d1, d2, n, dradius, Area;
+                if (Rad.isSelected()) {
 
-                Area = 0;
+                    degrees = false;
+                    JOptionPane.showMessageDialog(null,"Radians Active!");
 
-                // We have to parse the text to a type double.
-                m = Double.parseDouble(slope.getText());
-                b = Double.parseDouble(yint.getText());
-                d1 = Double.parseDouble(DomainLow.getText());
-                d2 = Double.parseDouble(DomainLow.getText());
-                n = Double.parseDouble(Accuracy.getText());
 
+                } else {
+
+                    degrees = true;
+                    JOptionPane.showMessageDialog(null, "Degrees Active");
+                    System.out.println(degrees);
+
+                }
             }
-        });}
-
-    public void Cosinefunction() {
-
-        JLabel heading = new JLabel("You have chosen the area option! ");
-        heading.setFont(new Font("Arial", Font.BOLD, 14));
-
-        JLabel promptName = new JLabel("Area of a Curve: Sinusoidal (Cosine)");
-
-        JLabel M = new JLabel("Please enter your slope: ");
-        JTextField slope = new JTextField(12);
-
-        JLabel B = new JLabel("Please enter your y - intercept: ");
-        JTextField yint = new JTextField(12);
-
-        JLabel DomainLow = new JLabel("Please enter your lower domain: ");
-        JTextField d1 = new JTextField(12);
-
-        JLabel DomainHigh = new JLabel("Please enter your higher domain: ");
-        JTextField d2 = new JTextField(12);
-
-        JLabel Accuracy = new JLabel("Please enter the amount of iterations: ");
-        JTextField n = new JTextField(12);
-
-        // Here is our button
-        JButton buttonArea = new JButton("Calculate Area!");
-
-        JTextField AreaDisplay = new JTextField(12);
-
-        setLayout(new FlowLayout());
-
-        // Add components to the JFrame
-        add(heading);
-        add(promptName);
-        add(M);
-        add(slope);
-        add(B);
-        add(yint);
-        add(DomainLow);
-        add(d1);
-        add(DomainHigh);
-        add(d2);
-        add(Accuracy);
-        add(n);
-        add(buttonArea);
-        add(AreaDisplay);
+        });
 
         buttonArea.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // First we define double variables.
-                double m, b, d1, d2, n, dradius, Area;
 
                 Area = 0;
 
                 // We have to parse the text to a type double.
-                m = Double.parseDouble(slope.getText());
-                b = Double.parseDouble(yint.getText());
-                d1 = Double.parseDouble(DomainLow.getText());
-                d2 = Double.parseDouble(DomainLow.getText());
-                n = Double.parseDouble(Accuracy.getText());
+                a = Double.parseDouble(A.getText());
+                k = Double.parseDouble(K.getText());
+                d = Double.parseDouble(D.getText());
+                c = Double.parseDouble(C.getText());
+                d1 = Double.parseDouble(D1.getText());
+                d2 = Double.parseDouble(D2.getText());
+                n = Double.parseDouble(N.getText());
+                gx = Double.parseDouble(Gx.getText());
+
+                rad.setQuadrant1Area(d1, d2, n);
+
+                width = (d2 - d1) / n;
+                length = a * (Math.sin(k * (d1 - d))) + c - gx;
+
+                for (double x = 0; x < n; x++) {
+
+                    rectangle = Math.abs(width * length);
+
+                    d1 += width;
+                    length = a * (Math.sin(k * (d1 - d))) + c - gx;
+                    Area += rectangle;
+
+                    AreaDisplay.setText(String.valueOf(Area));
+                }
 
             }
         });
     }
+
+            public void Cosinefunction() {
+
+                setSize(360, 400);
+
+                JLabel heading = new JLabel("You have chosen the area option! ");
+                heading.setFont(new Font("Arial", Font.BOLD, 14));
+
+                JLabel promptName = new JLabel("Area of a Curve: Sinusoidal (Cosine)");
+
+                JLabel AA = new JLabel("Please enter your a value: ");
+                JTextField A = new JTextField(12);
+
+                JLabel KK = new JLabel("Please enter your k value: ");
+                JTextField K = new JTextField(12);
+
+                JLabel DD = new JLabel("Please enter your D value: ");
+                JTextField D = new JTextField(12);
+
+                JLabel CC = new JLabel("Please enter your C value: ");
+                JTextField C = new JTextField(12);
+
+                JLabel DomainLow = new JLabel("Please enter your lower domain: ");
+                JTextField D1 = new JTextField(12);
+
+                JLabel DomainHigh = new JLabel("Please enter your higher domain: ");
+                JTextField D2 = new JTextField(12);
+
+                JLabel Accuracy = new JLabel("Please enter the accuracy: ");
+                JTextField N = new JTextField(12);
+
+                JLabel Gxx = new JLabel(" Please input a gx function: ");
+                JTextField Gx = new JTextField(12);
+
+                JToggleButton Rad = new JToggleButton("Toggle me for radians!");
+
+
+                // Here is our button
+                JButton buttonArea = new JButton("Calculate Area!");
+
+                JLabel AreaDisplay = new JLabel();
+
+                setLayout(new FlowLayout());
+
+                // Add components to the JFrame
+                add(heading);
+                add(promptName);
+                add(AA);
+                add(A);
+                add(KK);
+                add(K);
+                add(DD);
+                add(D);
+                add(CC);
+                add(C);
+                add(DomainLow);
+                add(D1);
+                add(DomainHigh);
+                add(D2);
+                add(Accuracy);
+                add(N);
+                add(Gxx);
+                add(Gx);
+                add(Rad);
+                add(buttonArea);
+                add(AreaDisplay);
+
+                Rad.addActionListener(new ActionListener() {
+
+                    public void actionPerformed(ActionEvent e) {
+                        if (Rad.isSelected()) {
+
+                            degrees = false;
+                            JOptionPane.showMessageDialog(null,"Radians Active!");
+
+
+                        } else {
+
+                            degrees = true;
+                            JOptionPane.showMessageDialog(null, "Degrees Active");
+                            System.out.println(degrees);
+
+                        }
+                    }
+                });
+
+                buttonArea.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        System.out.println(degrees);
+                        Area = 0;
+
+                        // We have to parse the text to a type double.
+                        a = Double.parseDouble(A.getText());
+                        k = Double.parseDouble(K.getText());
+                        d = Double.parseDouble(D.getText());
+                        c = Double.parseDouble(C.getText());
+                        d1 = Double.parseDouble(D1.getText());
+                        d2 = Double.parseDouble(D2.getText());
+                        n = Double.parseDouble(N.getText());
+                        gx = Double.parseDouble(Gx.getText());
+
+                        if (degrees = false) {
+
+                            d1 = Math.toRadians(Double.parseDouble(D1.getText()));
+                           d2 = Math.toRadians(Double.parseDouble(D2.getText()));
+
+                        }
+
+                        System.out.println(d2);
+
+                        rad.setQuadrant1Area(d1, d2, n);
+
+
+
+                        width = (d2 - d1) / n;
+                        length = a * (Math.cos(k * (d1 - d))) + c - gx;
+
+                        for (double x = 0; x < n; x++) {
+
+                            rectangle = Math.abs(width * length);
+
+                            d1 += width;
+                            length = a * (Math.cos(k * (d1 - d))) + c - gx;
+                            Area += rectangle;
+
+                            AreaDisplay.setText(String.valueOf(Area));
+
+                        }
+
+                    }
+                });
+    }
 }
+
+
 
 
 
