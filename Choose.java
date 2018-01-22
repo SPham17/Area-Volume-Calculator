@@ -7,32 +7,50 @@ import java.awt.event.ActionListener;
 
 public class Choose extends JFrame {
 
+    String n;
+    //access within specified classes
     AreaFunctions area = new AreaFunctions();
     VolumeFunctions volume = new VolumeFunctions();
 
+    public void setName(String n) {
+        JF_many_components name = new JF_many_components();
+        n = name.n;
 
-    public Choose(){
+        getName(n);
+
+    }
+
+    public String getName(String n) {
+        JF_many_components name = new JF_many_components();
+        n = name.n;
+
+
+        new JTextField(n);
+
+        return n;
+    }
+
+
+    public Choose() {
         super("Choosing Calculator");
 
-        setSize(280, 500);
+        setSize(400, 500);
 
 
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
-        // Here is our heading
-        JLabel heading = new JLabel("Please choose: Area or Volume? ");
+
+        JLabel heading = new JLabel("Please choose: Area or Volume? ( click area twice ) ");
         heading.setFont(new Font("Arial", Font.BOLD, 14));
 
-        JLabel Name = new JLabel("Welcome:!"  );
+        JLabel Name = new JLabel("Welcome:!" + getName());
 
-
-        // Here is our prompt
         JLabel promptName = new JLabel("Choice: ");
 
-        // Here is our button
         JButton buttonArea = new JButton("Area");
 
         JButton buttonVolume = new JButton("Volume");
+
 
         setLayout(new FlowLayout());
 
@@ -43,13 +61,13 @@ public class Choose extends JFrame {
         add(buttonArea);
         add(buttonVolume);
 
-
-        // closes the JFrame when clicking "button"
         buttonArea.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
+
                 setVisible(true);
 
+                //different buttons are added when clicking buttonArea
                 JButton Linear = new JButton("Linear function");
                 JButton Quadratic = new JButton("Quadratic function");
                 JButton Sine = new JButton("Sinusoidal function ( Sine )");
@@ -61,51 +79,58 @@ public class Choose extends JFrame {
                 add(Cosine);
 
                 Linear.addActionListener(new ActionListener() {
-                     public void actionPerformed(ActionEvent e) {
-                         area.Linearfunction();
-                         area.setVisible(true);
-                         dispose();
-                     }
-                 });
+                    public void actionPerformed(ActionEvent e) {
+                        //Linear button goes to AreaFunctions.LinearFunction
+                        //sets window to true
+                        area.Linearfunction();
+                        area.setVisible(true);
+                        dispose();
+                    }//end of actionPerformed
+                });//end of actionListener
 
-                 Quadratic.addActionListener(new ActionListener() {
-                     public void actionPerformed(ActionEvent e) {
-                         area.Quadraticfunction();
-                         area.setVisible(true);
-                         dispose();
-                      }
-                 });
+                Quadratic.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        //Quadratic button goes to AreaFunctions.QuadraticFunction
+                        //sets window to true
+                        area.Quadraticfunction();
+                        area.setVisible(true);
+                        dispose();
+                    }//end of actionPerformed
+                });//end of actionListener
 
                 Sine.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
+                        //Sine button goes to AreaFunctions.SineFunction
+                        //sets window to true
                         area.Sinefunction();
                         area.setVisible(true);
                         dispose();
-                    }
-                });
+                    }//end of actionPerformed
+                });//end of actionListener
 
                 Cosine.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
+                        //Cosine button goes to AreaFunctions.CosineFunction
+                        //sets window to true
                         area.Cosinefunction();
                         area.setVisible(true);
                         dispose();
-                    }
-                });
-
-            }
-        });
+                    }//end of actionPerformed
+                });//end of actionListener
+            }//end of actionPerformed
+        });//end of actionListener
 
         buttonVolume.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-
+                //buttonVolume button goes to VolumeFunctions
+                //sets window to true
                 volume.setVisible(true);
                 dispose();
-            }
-        });
+            }//end of actionPerformed
+        });//end of actionListener
 
-    }
+    }//end of constructor
+}//end of class
 
-
-}
 
 

@@ -15,13 +15,12 @@ public class AreaFunctions extends JFrame {
     // general variables for all functions
     double d1, d2, n, width, length, gx, Area, rectangle;
     // radians or degrees
-    boolean degrees;
+    boolean radians = true;
     // access to utility class
     Utility rad = new Utility();
 
     public AreaFunctions() {
         super("Steven's Area Calculator™");
-
 
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
@@ -36,6 +35,8 @@ public class AreaFunctions extends JFrame {
 
         JLabel promptName = new JLabel("Area of a Curve: Linear");
 
+        //sets label for each input(JTextField)
+        //inputs JTextField corresponding to which label it is referred to
         JLabel M = new JLabel("Please enter your slope: ");
         JTextField slope = new JTextField(12);
 
@@ -54,7 +55,6 @@ public class AreaFunctions extends JFrame {
         JLabel Gxx = new JLabel(" Please input a gx function: ");
         JTextField Gx = new JTextField(12);
 
-        // Here is our button
         JButton buttonArea = new JButton("Calculate Area!");
 
         JLabel AreaDisplay = new JLabel();
@@ -81,11 +81,10 @@ public class AreaFunctions extends JFrame {
 
         buttonArea.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // First we define double variables.
 
                 Area = 0;
 
-                // We have to parse the text to a type double.
+                //Convert textFields to Doubles
                 m = Double.parseDouble(slope.getText());
                 b = Double.parseDouble(yint.getText());
                 d1 = Double.parseDouble(D1.getText());
@@ -93,26 +92,38 @@ public class AreaFunctions extends JFrame {
                 n = Double.parseDouble(N.getText());
                 gx = Double.parseDouble(Gx.getText());
 
-                rad.setQuadrant1Area(d1, d2, n);
+                //Restriction
+                //if conditions are met, input "Error"
+                //refer to Utility class
+                if (d1 < 0 || d2 < d1 || n < 0) {
 
-                width = (d2 - d1) / n;
-                length = m * d1 + b - gx;
+                    AreaDisplay.setText("Error");
+                    rad.setQuadrant1Area(d1, d2, n);
 
-                for (double x = 0; x < n; x++) {
-
-                    rectangle = Math.abs(width * length);
-
-                    d1 += width;
+                    // if conditions are not met, continue profram
+                }else{
+                    //finds width of rectangles, cuts evenly dividing by amount of iterations
+                    width = (d2 - d1) / n;
+                    //finds initial length of rectangle
                     length = m * d1 + b - gx;
 
-                    Area += rectangle;
-
-                    AreaDisplay.setText(String.valueOf(Area));
-                }
-
-            }
-                    });
-                    }
+                    //loops for amount of iterations user inputs
+                    for (double x = 0; x < n; x++) {
+                        //calculates area of rectangle
+                        rectangle = Math.abs(width * length);
+                        //moves rectangle over one unit
+                        d1 += width;
+                        //find new length of the moved rectangle
+                        length = m * d1 + b - gx;
+                        //add the calculated area to total area
+                        Area += rectangle;
+                        //input answer to AreaDisplay, a JLabel
+                        AreaDisplay.setText(String.valueOf(Area));
+                    }//end of loop
+                }//end of else
+            }//end of actionPerformed
+        });//end of actionListener
+    }//end of method
 
     public void Quadraticfunction() {
 
@@ -144,7 +155,6 @@ public class AreaFunctions extends JFrame {
         JLabel Gxx = new JLabel(" Please input a gx function: ");
         JTextField Gx = new JTextField(12);
 
-        // Here is our button
         JButton buttonArea = new JButton("Calculate Area!");
 
         JLabel AreaDisplay = new JLabel();
@@ -173,11 +183,9 @@ public class AreaFunctions extends JFrame {
 
         buttonArea.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // First we define double variables.
 
                 Area = 0;
 
-                // We have to parse the text to a type double.
                 a = Double.parseDouble(Vert.getText());
                 h = Double.parseDouble(Horz.getText());
                 k = Double.parseDouble((yq.getText()));
@@ -186,26 +194,33 @@ public class AreaFunctions extends JFrame {
                 n = Double.parseDouble(N.getText());
                 gx = Double.parseDouble(Gx.getText());
 
-                rad.setQuadrant1Area(d1, d2, n);
+                if (d1 < 0 || d2 < d1 || n < 0) {
 
-                width = (d2 - d1) / n;
-                length = a * (d2 - h) * (d1 - h) + k - gx;
+                    AreaDisplay.setText("Error");
+                    rad.setQuadrant1Area(d1, d2, n);
 
-                for (double x = 0; x < n; x++) {
+                }else {
+                    //finds width of rectangles, cuts evenly dividing by amount of iterations
+                    width = (d2 - d1) / n;
+                    //finds initial length of rectangles
+                    length = a * (d2 - h) * (d1 - h) + k - gx;
 
-                    rectangle = Math.abs(width * length);
-
-                    d1 += width;
-                    length = a * (d1 - h) * (d1 - h) + k - gx;
-
-                    Area += rectangle;
-
-                    AreaDisplay.setText(String.valueOf(Area));
-                }
-
-            }
-        });
-    }
+                    for (double x = 0; x < n; x++) {
+                        //calculates area for rectangle
+                        rectangle = Math.abs(width * length);
+                        //moves rectangle one unit right
+                        d1 += width;
+                        //calculates new length of moved triangle
+                        length = a * (d1 - h) * (d1 - h) + k - gx;
+                        //add area of rectangle to total Area
+                        Area += rectangle;
+                        //input answer into AreaDisplay, a JLabel
+                        AreaDisplay.setText(String.valueOf(Area));
+                    }//end of loop
+                }//end of else
+            }//end of actionPerformed
+        });//end of actionListener
+    }//end of method
 
     public void Sinefunction() {
 
@@ -240,9 +255,8 @@ public class AreaFunctions extends JFrame {
         JLabel Gxx = new JLabel(" Please input a gx function: ");
         JTextField Gx = new JTextField(12);
 
-        JToggleButton Rad = new JToggleButton("Toggle me for Radians");
+        JToggleButton Rad = new JToggleButton("Toggle me for Degrees!");
 
-        // Here is our button
         JButton buttonArea = new JButton("Calculate Area!");
 
         JLabel AreaDisplay = new JLabel();
@@ -272,31 +286,33 @@ public class AreaFunctions extends JFrame {
         add(buttonArea);
         add(AreaDisplay);
 
+        //adds actionListener to toggle button
         Rad.addActionListener(new ActionListener() {
-
+            //if toggle button is clicked, perform actions
             public void actionPerformed(ActionEvent e) {
+                //if toggle button is clicked, set radians to false
                 if (Rad.isSelected()) {
 
-                    degrees = false;
-                    JOptionPane.showMessageDialog(null,"Radians Active!");
+                    radians = false;
+                    JOptionPane.showMessageDialog(null,"Degrees Active!");
 
-
+                // if toggle button is not clicked, or unclicked, set radians to true
                 } else {
 
-                    degrees = true;
-                    JOptionPane.showMessageDialog(null, "Degrees Active");
-                    System.out.println(degrees);
+                    radians = true;
+                    JOptionPane.showMessageDialog(null, "Radians Active");
 
-                }
-            }
-        });
+
+                }//end of else
+            }//end of actionPerformed
+        });//end of actionListener
 
         buttonArea.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
                 Area = 0;
 
-                // We have to parse the text to a type double.
+                //sets textsfields to doubles
                 a = Double.parseDouble(A.getText());
                 k = Double.parseDouble(K.getText());
                 d = Double.parseDouble(D.getText());
@@ -306,25 +322,44 @@ public class AreaFunctions extends JFrame {
                 n = Double.parseDouble(N.getText());
                 gx = Double.parseDouble(Gx.getText());
 
-                rad.setQuadrant1Area(d1, d2, n);
+                //
+                if (radians) {
 
-                width = (d2 - d1) / n;
-                length = a * (Math.sin(k * (d1 - d))) + c - gx;
+                    d1 = Math.toRadians(d1);
+                    d2 = Math.toRadians(d2);
 
-                for (double x = 0; x < n; x++) {
-
-                    rectangle = Math.abs(width * length);
-
-                    d1 += width;
-                    length = a * (Math.sin(k * (d1 - d))) + c - gx;
-                    Area += rectangle;
-
-                    AreaDisplay.setText(String.valueOf(Area));
                 }
 
-            }
-        });
-    }
+                if (d1 < 0 || d2 < d1 || n < 0) {
+
+                    AreaDisplay.setText("Error");
+                    rad.setQuadrant1Area(d1, d2, n);
+
+                }else {
+                    //finds width of rectangles, cuts evenly dividing by amount of iterations
+                    width = (d2 - d1) / n;
+                    //finds initial length of rectangles
+                    length = a * (Math.sin(k * (d1 - d))) + c - gx;
+
+                    //loops by amount of iterations
+                    for (double x = 0; x < n; x++) {
+
+                        //formula for calculating area of rectangle
+                        rectangle = Math.abs(width * length);
+
+                        //moves rectangle over one unit
+                        d1 += width;
+                        //finds new length after moved one unit
+                        length = a * (Math.sin(k * (d1 - d))) + c - gx;
+                        //add area of rectangle to total area
+                        Area += rectangle;
+                        //displays area in the AreaDisplay JLabel
+                        AreaDisplay.setText(String.valueOf(Area));
+                    }//end of loop
+                }//end of else
+            }//end of actionPerformed
+        });//end of actionListener
+    }//end of method
 
             public void Cosinefunction() {
 
@@ -359,7 +394,7 @@ public class AreaFunctions extends JFrame {
                 JLabel Gxx = new JLabel(" Please input a gx function: ");
                 JTextField Gx = new JTextField(12);
 
-                JToggleButton Rad = new JToggleButton("Toggle me for radians!");
+                JToggleButton Rad = new JToggleButton("Toggle me for Degrees!");
 
 
                 // Here is our button
@@ -397,15 +432,14 @@ public class AreaFunctions extends JFrame {
                     public void actionPerformed(ActionEvent e) {
                         if (Rad.isSelected()) {
 
-                            degrees = false;
-                            JOptionPane.showMessageDialog(null,"Radians Active!");
+                            radians = false;
+                            JOptionPane.showMessageDialog(null,"Degrees Active!");
 
 
                         } else {
 
-                            degrees = true;
-                            JOptionPane.showMessageDialog(null, "Degrees Active");
-                            System.out.println(degrees);
+                            radians = true;
+                            JOptionPane.showMessageDialog(null, "Radians Active");
 
                         }
                     }
@@ -413,7 +447,7 @@ public class AreaFunctions extends JFrame {
 
                 buttonArea.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
-                        System.out.println(degrees);
+
                         Area = 0;
 
                         // We have to parse the text to a type double.
@@ -426,38 +460,46 @@ public class AreaFunctions extends JFrame {
                         n = Double.parseDouble(N.getText());
                         gx = Double.parseDouble(Gx.getText());
 
-                        if (degrees = false) {
+                        if (radians) {
 
-                            d1 = Math.toRadians(Double.parseDouble(D1.getText()));
-                           d2 = Math.toRadians(Double.parseDouble(D2.getText()));
+                            d1 = Math.toRadians(d1);
+                            d2 = Math.toRadians(d2);
 
                         }
 
-                        System.out.println(d2);
 
-                        rad.setQuadrant1Area(d1, d2, n);
+                        if (d1 < 0 || d2 < d1 || n < 0) {
+                            AreaDisplay.setText("Error");
+                            rad.setQuadrant1Area(d1, d2, n);
 
-
-
-                        width = (d2 - d1) / n;
-                        length = a * (Math.cos(k * (d1 - d))) + c - gx;
-
-                        for (double x = 0; x < n; x++) {
-
-                            rectangle = Math.abs(width * length);
-
-                            d1 += width;
+                        }else {
+                            //finds width of rectangles, cuts evenly dividing by amount of iterations
+                            width = (d2 - d1) / n;
+                            //finds initial length of rectangles
                             length = a * (Math.cos(k * (d1 - d))) + c - gx;
-                            Area += rectangle;
 
-                            AreaDisplay.setText(String.valueOf(Area));
+                            //loops by amount of iterations
+                            for (double x = 0; x < n; x++) {
 
-                        }
+                                //formula for calculating area of rectangle
+                                rectangle = Math.abs(width * length);
 
-                    }
-                });
+                                //moves rectangle over one unit
+                                d1 += width;
+                                //finds new length after moved one unit
+                                length = a * (Math.cos(k * (d1 - d))) + c - gx;
+                                //add area of rectangle to total area
+                                Area += rectangle;
+                                //displays area in the AreaDisplay JLabel
+                                AreaDisplay.setText(String.valueOf(Area));
+
+                            }//end of loop
+                        }//end of else
+                    }//end of actionPerformed
+                });//end of actionListener
+            }//end of method
     }
-}
+
 
 
 

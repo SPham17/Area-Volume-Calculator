@@ -7,6 +7,8 @@ import java.awt.event.ActionListener;
 
 public class VolumeFunctions extends JFrame{
 
+    //variables needed for calculating
+    double m, b, d1, d2, n, dradius, height, circum, radius, volume;
     Utility q1 = new Utility();
 
     public VolumeFunctions(){
@@ -65,49 +67,57 @@ public class VolumeFunctions extends JFrame{
 
         buttonVolume.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // First we define double variables.
-                double m, b, d1, d2, n, dradius, height, circum, radius, volume;
-                // We have to parse the text to a type double.
+                //takes initialized variables
+                //converts from textField to double
                 m = Double.parseDouble(slope.getText());
                 b = Double.parseDouble(yint.getText());
                 d1 = Double.parseDouble(D1.getText());
                 d2 = Double.parseDouble(D2.getText());
                 n = Double.parseDouble(N.getText());
 
-                q1.setQuadrant1Volume(d1,d2,n);
+                //if d1 is less than 0, d2 less than d1, or n less than 0
+                //input text in VolumeDisplay saying Error
+                //refers to method in q1
+                if (d1 < 0 || d2 < d1 || n < 0) {
+                    VolumeDisplay.setText("Error");
+                    q1.setQuadrant1Volume(d1, d2, n);
 
-                volume = 0;
+                //if conditional statement is not met, continue the program
+                }else {
 
-                // Now we can perform the equation
-                for (double x = 0; x < n; x++) {
+                    volume = 0;
 
-                    // distance between the shells. divided by number of shells to ensure they are even
-                    dradius = (d2 - d1) / n;
+                    // Now we can perform the equation
+                    for (double x = 0; x < n; x++) {
 
-                    // finds radius of the shell, finds new radius depending on which shell iteration it is.
-                    radius = d2 - dradius * x;
+                        // distance between the shells. divided by number of shells to ensure they are even
+                        dradius = (d2 - d1) / n;
 
-                    // finds height, height differs in each shell, uses a different radius in different iterations
-                    height = m * radius + b;
+                        // finds radius of the shell, finds new radius depending on which shell iteration it is.
+                        radius = d2 - dradius * x;
 
-                    // finds circumference, circuference differs in each shell, uses a different radius in different iterations
-                    circum = 2 * Math.PI * radius;
+                        // finds height, height differs in each shell, uses a different radius in different iterations
+                        height = m * radius + b;
 
-                    // finds volume of the shell with previously calculated data, adds to total volume
-                    volume += Math.abs(dradius * height * circum);
+                        // finds circumference, circuference differs in each shell
+                        // uses a different radius in different iterations
+                        circum = 2 * Math.PI * radius;
 
-                    // repeat until reaches number of shells / iterations
-                    // end of for loop
+                        // finds volume of the shell with previously calculated data, adds to total volume
+                        volume += Math.abs(dradius * height * circum);
 
-                    // We will now pass the value of result to jTextField3.
-                    // At the same time, we are going to
-                    // change the value of result from a float to a string.
-                    VolumeDisplay.setText(String.valueOf(volume));
-                }
+                        // repeat until reaches number of shells / iterations
+                        // end of for loop
 
-            }
-        });
-            }
-    }
+                        // We will now pass the value of result to jTextField3.
+                        // At the same time, we are going to
+                        // change the value of result from a float to a string.
+                        VolumeDisplay.setText(String.valueOf(volume));
+                    }//end of for loop
+                }//end of else
+            }//end of actionPerformed
+        });//end of actionListener
+    }//end of constructor
+}//end of class
 
 
