@@ -15,7 +15,7 @@ public class AreaFunctions extends JFrame {
     // general variables for all functions
     double d1, d2, n, width, length, gx, Area, rectangle;
     // radians or degrees
-    boolean degrees;
+    boolean degrees = true;
     // access to utility class
     Utility rad = new Utility();
 
@@ -93,23 +93,29 @@ public class AreaFunctions extends JFrame {
                 n = Double.parseDouble(N.getText());
                 gx = Double.parseDouble(Gx.getText());
 
-                rad.setQuadrant1Area(d1, d2, n);
 
-                width = (d2 - d1) / n;
-                length = m * d1 + b - gx;
+                if (d1 < 0 || d2 < d1 || n < 0) {
 
-                for (double x = 0; x < n; x++) {
+                    AreaDisplay.setText("Error");
+                    rad.setQuadrant1Area(d1, d2, n);
 
-                    rectangle = Math.abs(width * length);
+                }else{
 
-                    d1 += width;
+                    width = (d2 - d1) / n;
                     length = m * d1 + b - gx;
 
-                    Area += rectangle;
+                    for (double x = 0; x < n; x++) {
 
-                    AreaDisplay.setText(String.valueOf(Area));
+                        rectangle = Math.abs(width * length);
+
+                        d1 += width;
+                        length = m * d1 + b - gx;
+
+                        Area += rectangle;
+
+                        AreaDisplay.setText(String.valueOf(Area));
+                    }
                 }
-
             }
                     });
                     }
@@ -186,23 +192,27 @@ public class AreaFunctions extends JFrame {
                 n = Double.parseDouble(N.getText());
                 gx = Double.parseDouble(Gx.getText());
 
-                rad.setQuadrant1Area(d1, d2, n);
+                if (d1 < 0 || d2 < d1 || n < 0) {
 
-                width = (d2 - d1) / n;
-                length = a * (d2 - h) * (d1 - h) + k - gx;
+                    AreaDisplay.setText("Error");
+                    rad.setQuadrant1Area(d1, d2, n);
 
-                for (double x = 0; x < n; x++) {
+                }else {
+                    width = (d2 - d1) / n;
+                    length = a * (d2 - h) * (d1 - h) + k - gx;
 
-                    rectangle = Math.abs(width * length);
+                    for (double x = 0; x < n; x++) {
 
-                    d1 += width;
-                    length = a * (d1 - h) * (d1 - h) + k - gx;
+                        rectangle = Math.abs(width * length);
 
-                    Area += rectangle;
+                        d1 += width;
+                        length = a * (d1 - h) * (d1 - h) + k - gx;
 
-                    AreaDisplay.setText(String.valueOf(Area));
+                        Area += rectangle;
+
+                        AreaDisplay.setText(String.valueOf(Area));
+                    }
                 }
-
             }
         });
     }
@@ -240,7 +250,7 @@ public class AreaFunctions extends JFrame {
         JLabel Gxx = new JLabel(" Please input a gx function: ");
         JTextField Gx = new JTextField(12);
 
-        JToggleButton Rad = new JToggleButton("Toggle me for Radians");
+        JToggleButton Rad = new JToggleButton("Toggle me for Degrees!");
 
         // Here is our button
         JButton buttonArea = new JButton("Calculate Area!");
@@ -278,13 +288,13 @@ public class AreaFunctions extends JFrame {
                 if (Rad.isSelected()) {
 
                     degrees = false;
-                    JOptionPane.showMessageDialog(null,"Radians Active!");
+                    JOptionPane.showMessageDialog(null,"Degrees Active!");
 
 
                 } else {
 
                     degrees = true;
-                    JOptionPane.showMessageDialog(null, "Degrees Active");
+                    JOptionPane.showMessageDialog(null, "Radians Active");
                     System.out.println(degrees);
 
                 }
@@ -306,22 +316,33 @@ public class AreaFunctions extends JFrame {
                 n = Double.parseDouble(N.getText());
                 gx = Double.parseDouble(Gx.getText());
 
-                rad.setQuadrant1Area(d1, d2, n);
+                if (degrees) {
 
-                width = (d2 - d1) / n;
-                length = a * (Math.sin(k * (d1 - d))) + c - gx;
+                    d1 = Math.toRadians(d1);
+                    d2 = Math.toRadians(d2);
 
-                for (double x = 0; x < n; x++) {
-
-                    rectangle = Math.abs(width * length);
-
-                    d1 += width;
-                    length = a * (Math.sin(k * (d1 - d))) + c - gx;
-                    Area += rectangle;
-
-                    AreaDisplay.setText(String.valueOf(Area));
                 }
 
+                if (d1 < 0 || d2 < d1 || n < 0) {
+
+                    AreaDisplay.setText("Error");
+                    rad.setQuadrant1Area(d1, d2, n);
+
+                }else {
+                    width = (d2 - d1) / n;
+                    length = a * (Math.sin(k * (d1 - d))) + c - gx;
+
+                    for (double x = 0; x < n; x++) {
+
+                        rectangle = Math.abs(width * length);
+
+                        d1 += width;
+                        length = a * (Math.sin(k * (d1 - d))) + c - gx;
+                        Area += rectangle;
+
+                        AreaDisplay.setText(String.valueOf(Area));
+                    }
+                }
             }
         });
     }
@@ -359,7 +380,7 @@ public class AreaFunctions extends JFrame {
                 JLabel Gxx = new JLabel(" Please input a gx function: ");
                 JTextField Gx = new JTextField(12);
 
-                JToggleButton Rad = new JToggleButton("Toggle me for radians!");
+                JToggleButton Rad = new JToggleButton("Toggle me for Degrees!");
 
 
                 // Here is our button
@@ -398,13 +419,13 @@ public class AreaFunctions extends JFrame {
                         if (Rad.isSelected()) {
 
                             degrees = false;
-                            JOptionPane.showMessageDialog(null,"Radians Active!");
+                            JOptionPane.showMessageDialog(null,"Degrees Active!");
 
 
                         } else {
 
                             degrees = true;
-                            JOptionPane.showMessageDialog(null, "Degrees Active");
+                            JOptionPane.showMessageDialog(null, "Radians Active");
                             System.out.println(degrees);
 
                         }
@@ -413,7 +434,7 @@ public class AreaFunctions extends JFrame {
 
                 buttonArea.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
-                        System.out.println(degrees);
+
                         Area = 0;
 
                         // We have to parse the text to a type double.
@@ -426,34 +447,37 @@ public class AreaFunctions extends JFrame {
                         n = Double.parseDouble(N.getText());
                         gx = Double.parseDouble(Gx.getText());
 
-                        if (degrees = false) {
 
-                            d1 = Math.toRadians(Double.parseDouble(D1.getText()));
-                           d2 = Math.toRadians(Double.parseDouble(D2.getText()));
+                        if (degrees) {
+
+                            d1 = Math.toRadians(d1);
+                            d2 = Math.toRadians(d2);
 
                         }
 
-                        System.out.println(d2);
 
-                        rad.setQuadrant1Area(d1, d2, n);
+                        if (d1 < 0 || d2 < d1 || n < 0) {
+                            AreaDisplay.setText("Error");
+                            rad.setQuadrant1Area(d1, d2, n);
+
+                        }else {
 
 
-
-                        width = (d2 - d1) / n;
-                        length = a * (Math.cos(k * (d1 - d))) + c - gx;
-
-                        for (double x = 0; x < n; x++) {
-
-                            rectangle = Math.abs(width * length);
-
-                            d1 += width;
+                            width = (d2 - d1) / n;
                             length = a * (Math.cos(k * (d1 - d))) + c - gx;
-                            Area += rectangle;
 
-                            AreaDisplay.setText(String.valueOf(Area));
+                            for (double x = 0; x < n; x++) {
 
+                                rectangle = Math.abs(width * length);
+
+                                d1 += width;
+                                length = a * (Math.cos(k * (d1 - d))) + c - gx;
+                                Area += rectangle;
+
+                                AreaDisplay.setText(String.valueOf(Area));
+
+                            }
                         }
-
                     }
                 });
     }

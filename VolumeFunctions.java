@@ -74,37 +74,42 @@ public class VolumeFunctions extends JFrame{
                 d2 = Double.parseDouble(D2.getText());
                 n = Double.parseDouble(N.getText());
 
-                q1.setQuadrant1Volume(d1,d2,n);
+                if (d1 < 0 || d2 < d1 || n < 0) {
+                    VolumeDisplay.setText("Error");
+                    q1.setQuadrant1Volume(d1, d2, n);
 
-                volume = 0;
 
-                // Now we can perform the equation
-                for (double x = 0; x < n; x++) {
+                }else {
 
-                    // distance between the shells. divided by number of shells to ensure they are even
-                    dradius = (d2 - d1) / n;
+                    volume = 0;
 
-                    // finds radius of the shell, finds new radius depending on which shell iteration it is.
-                    radius = d2 - dradius * x;
+                    // Now we can perform the equation
+                    for (double x = 0; x < n; x++) {
 
-                    // finds height, height differs in each shell, uses a different radius in different iterations
-                    height = m * radius + b;
+                        // distance between the shells. divided by number of shells to ensure they are even
+                        dradius = (d2 - d1) / n;
 
-                    // finds circumference, circuference differs in each shell, uses a different radius in different iterations
-                    circum = 2 * Math.PI * radius;
+                        // finds radius of the shell, finds new radius depending on which shell iteration it is.
+                        radius = d2 - dradius * x;
 
-                    // finds volume of the shell with previously calculated data, adds to total volume
-                    volume += Math.abs(dradius * height * circum);
+                        // finds height, height differs in each shell, uses a different radius in different iterations
+                        height = m * radius + b;
 
-                    // repeat until reaches number of shells / iterations
-                    // end of for loop
+                        // finds circumference, circuference differs in each shell, uses a different radius in different iterations
+                        circum = 2 * Math.PI * radius;
 
-                    // We will now pass the value of result to jTextField3.
-                    // At the same time, we are going to
-                    // change the value of result from a float to a string.
-                    VolumeDisplay.setText(String.valueOf(volume));
+                        // finds volume of the shell with previously calculated data, adds to total volume
+                        volume += Math.abs(dradius * height * circum);
+
+                        // repeat until reaches number of shells / iterations
+                        // end of for loop
+
+                        // We will now pass the value of result to jTextField3.
+                        // At the same time, we are going to
+                        // change the value of result from a float to a string.
+                        VolumeDisplay.setText(String.valueOf(volume));
+                    }
                 }
-
             }
         });
             }

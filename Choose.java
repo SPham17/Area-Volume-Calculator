@@ -34,6 +34,7 @@ public class Choose extends JFrame {
 
         JButton buttonVolume = new JButton("Volume");
 
+
         setLayout(new FlowLayout());
 
         // Add components to the JFrame
@@ -104,6 +105,10 @@ public class Choose extends JFrame {
         });
 
     }
+    public void name(String n){
+
+    }
+
 
 
 }

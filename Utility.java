@@ -4,10 +4,6 @@ import javax.swing.*;
 
 public class Utility extends JFrame {
 
-    boolean Degrees;
-    double d1;
-    double d2;
-
     public void setQuadrant1Volume(double d1, double d2, double n) {
 
         if (d1 < 0 || d2 < d1 || n < 0) {
