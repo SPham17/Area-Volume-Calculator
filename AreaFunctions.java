@@ -95,7 +95,7 @@ public class AreaFunctions extends JFrame {
                 //Restriction
                 //if conditions are met, input "Error"
                 //refer to Utility class
-                if (d1 < 0 || d2 < d1 || n < 0) {
+                if (d2 < d1 || n < 0) {
 
                     AreaDisplay.setText("Error");
                     rad.setQuadrant1Area(d1, d2, n);
@@ -194,7 +194,7 @@ public class AreaFunctions extends JFrame {
                 n = Double.parseDouble(N.getText());
                 gx = Double.parseDouble(Gx.getText());
 
-                if (d1 < 0 || d2 < d1 || n < 0) {
+                if (d2 < d1 || n < 0) {
 
                     AreaDisplay.setText("Error");
                     rad.setQuadrant1Area(d1, d2, n);
@@ -330,7 +330,7 @@ public class AreaFunctions extends JFrame {
 
                 }
 
-                if (d1 < 0 || d2 < d1 || n < 0) {
+                if ( d2 < d1 || n < 0) {
 
                     AreaDisplay.setText("Error");
                     rad.setQuadrant1Area(d1, d2, n);
@@ -468,7 +468,7 @@ public class AreaFunctions extends JFrame {
                         }
 
 
-                        if (d1 < 0 || d2 < d1 || n < 0) {
+                        if ( d2 < d1 || n < 0) {
                             AreaDisplay.setText("Error");
                             rad.setQuadrant1Area(d1, d2, n);
 

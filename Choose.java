@@ -7,29 +7,9 @@ import java.awt.event.ActionListener;
 
 public class Choose extends JFrame {
 
-    String n;
     //access within specified classes
     AreaFunctions area = new AreaFunctions();
     VolumeFunctions volume = new VolumeFunctions();
-
-    public void setName(String n) {
-        JF_many_components name = new JF_many_components();
-        n = name.n;
-
-        getName(n);
-
-    }
-
-    public String getName(String n) {
-        JF_many_components name = new JF_many_components();
-        n = name.n;
-
-
-        new JTextField(n);
-
-        return n;
-    }
-
 
     public Choose() {
         super("Choosing Calculator");
@@ -43,9 +23,9 @@ public class Choose extends JFrame {
         JLabel heading = new JLabel("Please choose: Area or Volume? ( click area twice ) ");
         heading.setFont(new Font("Arial", Font.BOLD, 14));
 
-        JLabel Name = new JLabel("Welcome:!" + getName());
+        JLabel Name = new JLabel("Welcome!");
 
-        JLabel promptName = new JLabel("Choice: ");
+        JLabel promptName = new JLabel("Choice : ");
 
         JButton buttonArea = new JButton("Area");
 

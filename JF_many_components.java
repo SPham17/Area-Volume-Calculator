@@ -13,7 +13,7 @@ public class JF_many_components extends JFrame {
     final int F_WIDTH   =  300;
     final int F_HEIGHT  =  500;
 
-    //access withih class Choose
+    //access within class Choose
     Choose choose = new Choose();
 
     public JF_many_components() {
@@ -52,9 +52,6 @@ public class JF_many_components extends JFrame {
         button.addActionListener(new ActionListener() {
             //inside this, when the action is performed, whatever is inside determines what will happen
             public void actionPerformed(ActionEvent e) {
-
-                    n = nameField.getText();
-                    choose.setName(n);
 
                     //jframe inside Choose will be true
                     choose.setVisible(true);
