@@ -13,7 +13,8 @@ public class Utility extends JFrame {
 
             JOptionPane.showMessageDialog(null, "\n INVALID\n" +
                     " Please input a positive values\n" +
-                    " Also, please ensure your lower domain is less than your higher domain.\n\n ");
+                    " Also, please ensure your lower domain is less than your higher domain.\n" +
+                    " We are only restricted to the first quadrant, please have lower domain greater than 1!\n\n ");
 
 
         }

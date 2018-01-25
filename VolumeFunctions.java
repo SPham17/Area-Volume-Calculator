@@ -112,7 +112,7 @@ public class VolumeFunctions extends JFrame{
                         // We will now pass the value of result to jTextField3.
                         // At the same time, we are going to
                         // change the value of result from a float to a string.
-                        VolumeDisplay.setText(String.valueOf(volume));
+                        VolumeDisplay.setText(String.valueOf(volume + " units cubed"));
                     }//end of for loop
                 }//end of else
             }//end of actionPerformed

@@ -118,7 +118,7 @@ public class AreaFunctions extends JFrame {
                         //add the calculated area to total area
                         Area += rectangle;
                         //input answer to AreaDisplay, a JLabel
-                        AreaDisplay.setText(String.valueOf(Area));
+                        AreaDisplay.setText(String.valueOf(Area + " units squared"));
                     }//end of loop
                 }//end of else
             }//end of actionPerformed
@@ -215,7 +215,7 @@ public class AreaFunctions extends JFrame {
                         //add area of rectangle to total Area
                         Area += rectangle;
                         //input answer into AreaDisplay, a JLabel
-                        AreaDisplay.setText(String.valueOf(Area));
+                        AreaDisplay.setText(String.valueOf(Area + " units squared"));
                     }//end of loop
                 }//end of else
             }//end of actionPerformed
@@ -354,7 +354,7 @@ public class AreaFunctions extends JFrame {
                         //add area of rectangle to total area
                         Area += rectangle;
                         //displays area in the AreaDisplay JLabel
-                        AreaDisplay.setText(String.valueOf(Area));
+                        AreaDisplay.setText(String.valueOf(Area + " units squared"));
                     }//end of loop
                 }//end of else
             }//end of actionPerformed
@@ -491,7 +491,7 @@ public class AreaFunctions extends JFrame {
                                 //add area of rectangle to total area
                                 Area += rectangle;
                                 //displays area in the AreaDisplay JLabel
-                                AreaDisplay.setText(String.valueOf(Area));
+                                AreaDisplay.setText(String.valueOf(Area + " units squared"));
 
                             }//end of loop
                         }//end of else
